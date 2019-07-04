@@ -1,13 +1,13 @@
 
 Properties {
 
-    $ModuleNames    = 'GraylogSidecardDsc'
+    $ModuleNames    = 'GraylogSidecarDsc'
     $ModuleMerge    = $false
 
     $GalleryEnabled = $true
     $GalleryKey     = Use-VaultSecureString -TargetName 'PowerShell Gallery Key (arcadesolutionsag)'
 
     $GitHubEnabled  = $true
-    $GitHubRepoName = 'arcadesolutionsag/GraylogSidecardDsc'
+    $GitHubRepoName = 'arcadesolutionsag/GraylogSidecarDsc'
     $GitHubToken    = Use-VaultSecureString -TargetName 'GitHub Token (arcadesolutionsag)'
 }
