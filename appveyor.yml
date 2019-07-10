@@ -10,6 +10,7 @@ install:
   - ps: Install-Module psake -Force
   - ps: Install-Module Pester -Force
   - ps: Install-Module PSScriptAnalyzer -Force
+  - ps: Install-Module DscResourceTestHelper -Force
 
 # Set version to build number
 version: '{build}'
