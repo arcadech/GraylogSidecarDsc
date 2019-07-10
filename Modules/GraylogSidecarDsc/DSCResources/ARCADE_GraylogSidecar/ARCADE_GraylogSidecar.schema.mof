@@ -1,0 +1,12 @@
+[ClassVersion("1.0.0.0"), FriendlyName("GraylogSidecar")]
+class ARCADE_GraylogSidecar : OMI_BaseResource
+{
+  [Key, Description("Specifies the resource is a single instance, the value must be 'Yes'."), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
+  [Write, Description("Specified if the client should be added or removed."), ValueMap{"Present","Absent"}, Values{"Present","Absent"}] String Ensure;
+  [Required, Description("Path to the setup file.")] String SetupPath;
+  [Read, Description("Available version on the setup file.")] String SetupVersion;
+  [Read, Description("Installed version on the system.")] String Version;
+  [Required, Description("Target Graylog server url.")] String ServerUrl;
+  [Required, Description("Target Graylog API token.")] String ServerApiToken;
+  [Write, Description("The sidecar node name to identify the installation. Matches the hostname by default.")] String NodeName;
+};
