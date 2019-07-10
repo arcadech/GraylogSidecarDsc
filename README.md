@@ -13,7 +13,10 @@ on the target Windows system.
 
 ## Features
 
-tbd
+### DSC Resources
+
+* **GraylogSidecar**  
+  DSC resource to install and configure the Graylog Sidecar collector.
 
 ## Versions
 
