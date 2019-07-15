@@ -2,7 +2,7 @@
 class ARCADE_GraylogSidecar : OMI_BaseResource
 {
   [Key, Description("Specifies the resource is a single instance, the value must be 'Yes'."), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
-  [Write, Description("Specified if the client should be added or removed."), ValueMap{"Present","Absent"}, Values{"Present","Absent"}] String Ensure;
+  [Write, Description("Specified if the client should be added or removed."), ValueMap{"Present", "Absent"}, Values{"Present", "Absent"}] String Ensure;
   [Required, Description("Path to the setup file.")] String SetupPath;
   [Read, Description("Available version on the setup file.")] String SetupVersion;
   [Read, Description("Installed version on the system.")] String Version;
