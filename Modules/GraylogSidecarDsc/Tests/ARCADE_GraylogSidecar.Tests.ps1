@@ -15,7 +15,7 @@ InModuleScope 'ARCADE_GraylogSidecar' {
 
     Mock 'Get-GraylogSidecarVersion' { '' }
 
-    Mock 'Get-GraylogSidecarConfiguration' {
+    Mock 'Get-GraylogSidecarConfigFile' {
         [PSCustomObject] @{
             ServerUrl      = ''
             ServerApiToken = ''
@@ -23,7 +23,7 @@ InModuleScope 'ARCADE_GraylogSidecar' {
         }
     }
 
-    Mock 'Set-GraylogSidecarConfiguration' { }
+    Mock 'Set-GraylogSidecarConfigFile' { }
 
     Mock 'Install-GraylogSidecar' { }
 

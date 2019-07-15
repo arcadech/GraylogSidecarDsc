@@ -8,10 +8,10 @@
         with the three properties.
 
     .EXAMPLE
-        PS C:\> Get-GraylogSidecarConfiguration
+        PS C:\> Get-GraylogSidecarConfigFile
         Get the current sidecar configuration.
 #>
-function Get-GraylogSidecarConfiguration
+function Get-GraylogSidecarConfigFile
 {
     [CmdletBinding()]
     [OutputType([System.String])]

@@ -48,7 +48,7 @@ function Get-TargetResource
     $version      = Get-GraylogSidecarVersion
 
     # Get the sidecar configuration
-    $config = Get-GraylogSidecarConfiguration
+    $config = Get-GraylogSidecarConfigFile
 
     # Set ensure to present if the Sidecar is installed, even if the version
     # does not match.
@@ -161,19 +161,19 @@ function Set-TargetResource
     # Update the configuration, if it does not match
     if ($Ensure -eq 'Present' -and $currentState.NodeName -ne $NodeName)
     {
-        Set-GraylogSidecarConfiguration -NodeName $NodeName
+        Set-GraylogSidecarConfigFile -NodeName $NodeName
     }
 
     # Update the configuration, if it does not match
     if ($Ensure -eq 'Present' -and $currentState.ServerUrl -ne $ServerUrl)
     {
-        Set-GraylogSidecarConfiguration -ServerUrl $ServerUrl
+        Set-GraylogSidecarConfigFile -ServerUrl $ServerUrl
     }
 
     # Update the configuration, if it does not match
     if ($Ensure -eq 'Present' -and $currentState.ServerApiToken -ne $ServerApiToken)
     {
-        Set-GraylogSidecarConfiguration -ServerApiToken $ServerApiToken
+        Set-GraylogSidecarConfigFile -ServerApiToken $ServerApiToken
     }
 }
 
