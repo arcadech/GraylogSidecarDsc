@@ -156,7 +156,7 @@ Task Verify -requiredVariables VerifyBuildSystem {
             $actual   = Get-Content -Path "$PSScriptRoot\$file"
 
             # Compare objects
-            #Assert -conditionToCheck ($null -eq (Compare-Object -ReferenceObject $expected -DifferenceObject $actual)) -failureMessage "The file '$file' is not current. Please update the file and restart the build."
+            Assert -conditionToCheck ($null -eq (Compare-Object -ReferenceObject $expected -DifferenceObject $actual)) -failureMessage "The file '$file' is not current. Please update the file and restart the build."
         }
     }
     else
@@ -408,6 +408,7 @@ Task ScriptAnalyzer -requiredVariables ReleasePath, ModulePath, ModuleNames, Scr
     {
         $moduleScriptAnalyzerFile = Join-Path -Path $ScriptAnalyzerPath -ChildPath "$moduleName-$ScriptAnalyzerFile"
 
+        # Invoke script analyzer on the module but exclude all examples
         $analyzeResults = Invoke-ScriptAnalyzer -Path "$ReleasePath\$moduleName" -IncludeRule $ScriptAnalyzerRules -Recurse
         $analyzeResults = $analyzeResults | Where-Object { $_.ScriptPath -notlike "$releasePath\$moduleName\Examples\*" }
         $analyzeResults | ConvertTo-Json | Out-File -FilePath $moduleScriptAnalyzerFile -Encoding UTF8
@@ -581,16 +582,11 @@ function Show-ScriptAnalyzerResult($ModuleName, $Rule, $Result)
 
     Write-Host "`nModule $ModuleName" -ForegroundColor Green
 
-    # Combine all rules into one array for testing
-    $allRules = [System.String[]] $Rule.RuleName
-    $Result | ForEach-Object { $allRules += $_.RuleName }
-    $allRules = $allRules | Select-Object -Unique
-
-    foreach ($currentRule in $allRules)
+    foreach ($currentRule in $Rule)
     {
-        Write-Host "`n   Rule $($currentRule)" -ForegroundColor Green
+        Write-Host "`n   Rule $($currentRule.RuleName)" -ForegroundColor Green
 
-        $records = $Result.Where({$_.RuleName -eq $currentRule})
+        $records = $Result.Where({$_.RuleName -eq $currentRule.RuleName})
 
         if ($records.Count -eq 0)
         {
