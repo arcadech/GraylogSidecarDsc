@@ -1,7 +1,7 @@
 # GraylogSidecarDsc
 
 [![PowerShell Gallery - GraylogSidecarDsc](https://img.shields.io/badge/PowerShell_Gallery-GraylogSidecarDsc-0072C6.svg)](https://www.powershellgallery.com/packages/GraylogSidecarDsc)
-[![GitHub - Release](https://img.shields.io/github/release/claudiospizzi/GraylogSidecarDsc.svg)](https://github.com/claudiospizzi/GraylogSidecarDsc/releases)
+[![GitHub - Release](https://img.shields.io/github/release/arcadesolutionsag/GraylogSidecarDsc.svg)](https://github.com/claudiospizzi/GraylogSidecarDsc/releases)
 [![AppVeyor - master](https://img.shields.io/appveyor/ci/claudiospizzi/GraylogSidecarDsc/master.svg)](https://ci.appveyor.com/project/claudiospizzi/GraylogSidecarDsc/branch/master)
 [![AppVeyor - dev](https://img.shields.io/appveyor/ci/claudiospizzi/GraylogSidecarDsc/dev.svg)](https://ci.appveyor.com/project/claudiospizzi/GraylogSidecarDsc/branch/dev)
 
