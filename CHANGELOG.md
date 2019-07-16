@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is mainly based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## 0.2.0 - 2019-07-10
+## 0.2.1 - 2019-07-16
+
+* Fixed: Remove /api/ on the API functions
+
+## 0.2.0 - 2019-07-16
 
 * Added: GraylogSidecarConfiguration to assign collectors and configurations
 

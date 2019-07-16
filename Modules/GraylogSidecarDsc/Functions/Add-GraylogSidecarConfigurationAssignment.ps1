@@ -7,7 +7,7 @@
         and configuration to the node.
 
     .EXAMPLE
-        PS C:\> Add-GraylogSidecarConfigurationAssignment -Uri 'https://graylog.contoso.com' -Credential $cred -NodeId '99b5a37c-a277-444e-b8fd-c261c18ac5bd' -CollectorId '5d06f16771c02a78f6ed644f' -ConfigurationId '5d06ed64702a71f168f6c74f
+        PS C:\> Add-GraylogSidecarConfigurationAssignment -Uri 'https://graylog.contoso.com/api' -Credential $cred -NodeId '99b5a37c-a277-444e-b8fd-c261c18ac5bd' -CollectorId '5d06f16771c02a78f6ed644f' -ConfigurationId '5d06ed64702a71f168f6c74f
         Add the specified configuration.
 #>
 function Add-GraylogSidecarConfigurationAssignment
@@ -44,7 +44,7 @@ function Add-GraylogSidecarConfigurationAssignment
         # Get the current graylog sidecar configuration, including assignments
         $graylogSidecarSplat = @{
             Method  = 'Get'
-            Uri     = '{0}/api/sidecars/{1}' -f $Uri, $NodeId
+            Uri     = '{0}/sidecars/{1}' -f $Uri.TrimEnd('/'), $NodeId
             Headers = @{
                 Authorization = $auth
             }
@@ -63,7 +63,7 @@ function Add-GraylogSidecarConfigurationAssignment
         # Create a new request to push the desired assignments
         $graylogSidecarConfigurationAssignmentSplat = @{
             Method  = 'Put'
-            Uri     = '{0}/api/sidecars/configurations' -f $Uri
+            Uri     = '{0}/sidecars/configurations' -f $Uri.TrimEnd('/')
             Body    = (@{
                 nodes = @(
                     @{

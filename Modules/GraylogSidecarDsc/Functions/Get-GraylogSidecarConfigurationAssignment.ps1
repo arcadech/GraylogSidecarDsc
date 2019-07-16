@@ -7,7 +7,7 @@
         configuration for the specified node an collector.
 
     .EXAMPLE
-        PS C:\> Get-GraylogSidecarConfigurationAssignment -Uri 'https://graylog.contoso.com' -Credential $cred -NodeId '99b5a37c-a277-444e-b8fd-c261c18ac5bd' -CollectorId '5d06f16771c02a78f6ed644f'
+        PS C:\> Get-GraylogSidecarConfigurationAssignment -Uri 'https://graylog.contoso.com/api' -Credential $cred -NodeId '99b5a37c-a277-444e-b8fd-c261c18ac5bd' -CollectorId '5d06f16771c02a78f6ed644f'
         Get the assigned configuration.
 #>
 function Get-GraylogSidecarConfigurationAssignment
@@ -41,7 +41,7 @@ function Get-GraylogSidecarConfigurationAssignment
         # Get the current graylog sidecar configuration, including assignments
         $graylogSidecarSplat = @{
             Method  = 'Get'
-            Uri     = '{0}/api/sidecars/{1}' -f $Uri, $NodeId
+            Uri     = '{0}/sidecars/{1}' -f $Uri.TrimEnd('/'), $NodeId
             Headers = @{
                 Authorization = $auth
             }
