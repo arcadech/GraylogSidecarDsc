@@ -1,6 +1,5 @@
 # GraylogSidecarDsc
 
-
 [![PowerShell Gallery - GraylogSidecarDsc](https://img.shields.io/badge/PowerShell_Gallery-GraylogSidecarDsc-0072C6.svg)](https://www.powershellgallery.com/packages/GraylogSidecarDsc)
 [![GitHub - Release](https://img.shields.io/github/release/claudiospizzi/GraylogSidecarDsc.svg)](https://github.com/claudiospizzi/GraylogSidecarDsc/releases)
 [![AppVeyor - master](https://img.shields.io/appveyor/ci/claudiospizzi/GraylogSidecarDsc/master.svg)](https://ci.appveyor.com/project/claudiospizzi/GraylogSidecarDsc/branch/master)
@@ -17,6 +16,10 @@ on the target Windows system.
 
 * **GraylogSidecar**  
   DSC resource to install and configure the Graylog Sidecar collector.
+
+* **GraylogSidecarConfiguration**  
+  DSC resource to configure the Graylog Sidecar collector and configuration
+  assignments.
 
 ## Versions
 

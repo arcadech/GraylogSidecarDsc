@@ -3,7 +3,7 @@
     RootModule = 'GraylogSidecarDsc.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.1.0'
+    ModuleVersion = '0.2.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -66,6 +66,10 @@
         'Install-GraylogSidecar'
         'Uninstall-GraylogSidecar'
         'Set-GraylogSidecarConfigFile'
+        'Get-GraylogSidecarNodeId'
+        'Get-GraylogSidecarConfigurationAssignment'
+        'Add-GraylogSidecarConfigurationAssignment'
+        'Remove-GraylogSidecarConfigurationAssignment'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
