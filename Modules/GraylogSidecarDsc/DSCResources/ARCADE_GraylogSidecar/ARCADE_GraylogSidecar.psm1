@@ -175,6 +175,12 @@ function Set-TargetResource
     {
         Set-GraylogSidecarConfigFile -ServerApiToken $ServerApiToken
     }
+
+    # Wait 10 seconds to give the Graylog Sidecar the chance to register itself
+    # on the graylog server, so that at the end of the configuration, the
+    # sidecar is already available on the Graylog server and ready to be
+    # configured e.g. by the GraylogSidecarConfiguration resource.
+    Start-Sleep -Seconds 10
 }
 
 <#
