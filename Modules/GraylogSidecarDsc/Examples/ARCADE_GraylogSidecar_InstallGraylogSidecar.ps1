@@ -22,7 +22,7 @@ Configuration ARCADE_GraylogSidecar_InstallGraylogSidecar
             IsSingleInstance = 'Yes'
             Ensure           = 'Present'
             SetupPath        = "$Env:Temp\graylog_sidecar_installer_1.0.1-1.exe"
-            ServerUrl        = 'https://graylog.contoso.com/api/'
+            ServerUrl        = 'https://graylog.contoso.com/'
             ServerApiToken   = 'yb34rs6w9nmd6p5y3x2a4kk6a7n8q9p9w7d5us4de3l2ahg'
             DependsOn        = '[xRemoteFile]DownloadSetup'
         }
