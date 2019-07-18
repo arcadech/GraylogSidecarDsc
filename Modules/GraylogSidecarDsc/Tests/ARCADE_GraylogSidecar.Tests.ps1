@@ -13,6 +13,8 @@ Import-Module -Name "$Global:modulePath\$Global:moduleName\DSCResources\$Global:
 
 InModuleScope 'ARCADE_GraylogSidecar' {
 
+    Mock 'Get-ItemProperty' { }
+
     Mock 'Get-GraylogSidecarVersion' { '' }
 
     Mock 'Get-GraylogSidecarConfigFile' {
