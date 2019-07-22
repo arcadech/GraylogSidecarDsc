@@ -24,10 +24,9 @@ InModuleScope 'ARCADE_GraylogSidecarConfiguration' {
     Context 'Get-TargetResource' {
 
         $getParams = @{
-            IsSingleInstance = 'Yes'
-            ServerUrl        = 'https://graylog.contoso.com/'
-            Credential       = [System.Management.Automation.PSCredential]::new('username', (Protect-String -String 'password'))
-            CollectorId      = '5d06f16771c02a78f6ed644f'
+            ServerUrl   = 'https://graylog.contoso.com/'
+            Credential  = [System.Management.Automation.PSCredential]::new('username', (Protect-String -String 'password'))
+            CollectorId = '5d06f16771c02a78f6ed644f'
         }
 
         It 'Should return a System.Collections.Hashtable' {
@@ -43,12 +42,11 @@ InModuleScope 'ARCADE_GraylogSidecarConfiguration' {
     Context 'Set-TargetResource' {
 
         $setParams = @{
-            IsSingleInstance = 'Yes'
-            Ensure           = 'Present'
-            ServerUrl        = 'https://graylog.contoso.com/'
-            Credential       = [System.Management.Automation.PSCredential]::new('username', (Protect-String -String 'password'))
-            CollectorId      = '5d06f16771c02a78f6ed644f'
-            ConfigurationId  = '5d02c71f98a35b06a4edb7fc'
+            Ensure          = 'Present'
+            ServerUrl       = 'https://graylog.contoso.com/'
+            Credential      = [System.Management.Automation.PSCredential]::new('username', (Protect-String -String 'password'))
+            CollectorId     = '5d06f16771c02a78f6ed644f'
+            ConfigurationId = '5d02c71f98a35b06a4edb7fc'
         }
 
         It 'Should not return anything' {
@@ -64,12 +62,11 @@ InModuleScope 'ARCADE_GraylogSidecarConfiguration' {
     Context 'Test-TargetResource' {
 
         $testParams = @{
-            IsSingleInstance = 'Yes'
-            Ensure           = 'Present'
-            ServerUrl        = 'https://graylog.contoso.com/'
-            Credential       = [System.Management.Automation.PSCredential]::new('username', (Protect-String -String 'password'))
-            CollectorId      = '5d06f16771c02a78f6ed644f'
-            ConfigurationId  = '5d02c71f98a35b06a4edb7fc'
+            Ensure          = 'Present'
+            ServerUrl       = 'https://graylog.contoso.com/'
+            Credential      = [System.Management.Automation.PSCredential]::new('username', (Protect-String -String 'password'))
+            CollectorId     = '5d06f16771c02a78f6ed644f'
+            ConfigurationId = '5d02c71f98a35b06a4edb7fc'
         }
 
         It 'Should return a System.Boolean' {

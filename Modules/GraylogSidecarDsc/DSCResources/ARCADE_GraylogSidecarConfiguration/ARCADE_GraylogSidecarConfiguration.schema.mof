@@ -1,11 +1,10 @@
 [ClassVersion("1.0.0.0"), FriendlyName("GraylogSidecarConfiguration")]
 class ARCADE_GraylogSidecarConfiguration : OMI_BaseResource
 {
-  [Key, Description("Specifies the resource is a single instance, the value must be 'Yes'."), ValueMap{"Yes"}, Values{"Yes"}] String IsSingleInstance;
   [Write, Description("Specified if the configuration should be added or removed."), ValueMap{"Present", "Absent"}, Values{"Present", "Absent"}] String Ensure;
   [Required, Description("Target Graylog server url.")] String ServerUrl;
   [Required, Description("Username and password for the Graylog server."), EmbeddedInstance("MSFT_Credential")] String Credential;
   [Read, Description("The sidecar node id.")] String NodeId;
-  [Required, Description("The sidecar collector id to assign to the local node.")] String CollectorId;
+  [Key, Description("The sidecar collector id to assign to the local node.")] String CollectorId;
   [Write, Description("The sidecar configuration id to assign to the local node.")] String ConfigurationId;
 };

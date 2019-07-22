@@ -2,9 +2,6 @@
     .SYNOPSIS
         Get the current Graylog sidecar configuration assignment.
 
-    .PARAMETER IsSingleInstance
-        Specifies the resource is a single instance, the value must be 'Yes'.
-
     .PARAMETER ServerUrl
         Target Graylog server url.
 
@@ -20,11 +17,6 @@ function Get-TargetResource
     [OutputType([System.Collections.Hashtable])]
     param
     (
-        [Parameter(Mandatory = $true)]
-        [ValidateSet('Yes')]
-        [System.String]
-        $IsSingleInstance,
-
         [Parameter(Mandatory = $true)]
         [System.String]
         $ServerUrl,
@@ -55,13 +47,12 @@ function Get-TargetResource
     }
 
     $returnValue = @{
-        IsSingleInstance = $IsSingleInstance
-        Ensure           = $ensure
-        ServerUrl        = $ServerUrl
-        Credential       = $Credential
-        NodeId           = [System.String] $nodeId
-        CollectorId      = $CollectorId
-        ConfigurationId  = [System.String] $configurationId
+        Ensure          = $ensure
+        ServerUrl       = $ServerUrl
+        Credential      = $Credential
+        NodeId          = [System.String] $nodeId
+        CollectorId     = $CollectorId
+        ConfigurationId = [System.String] $configurationId
     }
 
     return $returnValue
@@ -70,9 +61,6 @@ function Get-TargetResource
 <#
     .SYNOPSIS
         Add or remove Graylog sidecar configuration assignment.
-
-    .PARAMETER IsSingleInstance
-        Specifies the resource is a single instance, the value must be 'Yes'.
 
     .PARAMETER Ensure
         Specified if the configuration should be added or removed.
@@ -95,11 +83,6 @@ function Set-TargetResource
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
     param
     (
-        [Parameter(Mandatory = $true)]
-        [ValidateSet('Yes')]
-        [System.String]
-        $IsSingleInstance,
-
         [Parameter(Mandatory = $false)]
         [ValidateSet('Present', 'Absent')]
         [System.String]
@@ -148,9 +131,6 @@ function Set-TargetResource
     .SYNOPSIS
         Test Graylog sidecar configuration assignment.
 
-    .PARAMETER IsSingleInstance
-        Specifies the resource is a single instance, the value must be 'Yes'.
-
     .PARAMETER Ensure
         Specified if the configuration should be added or removed.
 
@@ -172,11 +152,6 @@ function Test-TargetResource
     [OutputType([System.Boolean])]
     param
     (
-        [Parameter(Mandatory = $true)]
-        [ValidateSet('Yes')]
-        [System.String]
-        $IsSingleInstance,
-
         [Parameter(Mandatory = $false)]
         [ValidateSet('Present', 'Absent')]
         [System.String]
@@ -201,7 +176,7 @@ function Test-TargetResource
 
     Write-Verbose 'Test Graylog Sidecar Configuration resource'
 
-    $currentState = Get-TargetResource -IsSingleInstance $IsSingleInstance -ServerUrl $ServerUrl -Credential $Credential -CollectorId $CollectorId
+    $currentState = Get-TargetResource -ServerUrl $ServerUrl -Credential $Credential -CollectorId $CollectorId
 
     if ($Ensure -eq 'Present')
     {
