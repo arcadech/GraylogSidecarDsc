@@ -20,5 +20,7 @@ function Set-GraylogSidecarNodeId
         $NodeId
     )
 
+    Write-Verbose 'Update Graylog Sidecar node id'
+
     [System.IO.File]::WriteAllText('C:\Program Files\Graylog\sidecar\node-id', $NodeId, [System.Text.Encoding]::UTF8)
 }
