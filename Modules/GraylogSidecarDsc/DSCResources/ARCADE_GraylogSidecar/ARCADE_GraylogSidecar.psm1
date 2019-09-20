@@ -161,7 +161,7 @@ function Set-TargetResource
         Install-GraylogSidecar -SetupPath $SetupPath -ServerUrl $ServerUrl -ServerApiToken $ServerApiToken
 
         # If the sidecar was uninstalled, reset the node id
-        if (-not [System.String]::IsNullOrEmpty())
+        if (-not [System.String]::IsNullOrEmpty($nodeId))
         {
             Set-GraylogSidecarNodeId -NodeId $nodeId
         }
