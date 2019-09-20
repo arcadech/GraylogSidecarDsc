@@ -25,6 +25,8 @@ InModuleScope 'ARCADE_GraylogSidecar' {
         }
     }
 
+    Mock 'Set-GraylogSidecarNodeId' { }
+
     Mock 'Set-GraylogSidecarConfigFile' { }
 
     Mock 'Install-GraylogSidecar' { }
