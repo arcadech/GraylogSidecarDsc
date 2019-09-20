@@ -36,49 +36,49 @@ function Install-GraylogSidecar
 
         [Parameter(Mandatory = $true)]
         [System.String]
-        $ServerApiToken,
-
-        [Parameter(Mandatory = $false)]
-        [AllowEmptyString()]
-        [System.String]
-        $NodeId
+        $ServerApiToken
     )
 
-    # Install the application
+    # Name of the installer process
+    $processName = Get-Item -Path $SetupPath |
+                       Select-Object -ExpandProperty 'BaseName'
+
+    # Install or update the application
     Write-Verbose "Install Graylog Sidecar application from $SetupPath"
     $appInstallResult = (& $SetupPath /S "-SERVERURL=$ServerUrl" "-APITOKEN=$ServerApiToken")
     $appInstallResult | Write-Verbose
 
-    # Wait for the install to complete. To be sure, add a sleep second after
-    # scanning the installation status.
-    $appInstallState = $false
-    for ($c = 0; $c -lt 300 -and -not $appInstallState; $c++)
+    # Wait for the install to complete. Check if the setup process is still
+    # running. Timeout after 5 minutes.
+    $setupRunning = $true
+    for ($c = 0; $c -lt 300 -and $setupRunning; $c++)
     {
-        $appInstallState = -not [System.String]::IsNullOrWhiteSpace((Get-GraylogSidecarVersion))
-        Start-Sleep -Seconds 3
+        $setupRunning = $null -ne (Get-Process -Name $processName -ErrorAction 'SilentlyContinue')
+
+        Start-Sleep -Seconds 1
     }
 
-    # Update the node if, if it was specified
-    if (-not ([System.String]::IsNullOrEmpty($NodeId)))
+    # Sleep for 10 seconds to allow post install/update processes to complete
+    Start-Sleep -Seconds 10
+
+    # Install the service, if it is not installed alreaday due to an update
+    if ($null -eq (Get-Service -Name 'graylog-sidecar' -ErrorAction SilentlyContinue))
     {
-        Set-GraylogSidecarNodeId -NodeId $NodeId
+        Write-Verbose 'Install Graylog Sidecar service'
+        $svcInstallResult = (& 'C:\Program Files\graylog\sidecar\graylog-sidecar.exe' -service install)
+        $svcInstallResult | Write-Verbose
+
+        # Wait for the service install to complete. To be sure, add a sleep second
+        # after scanning the installation status.
+        $svcInstallState = $false
+        for ($c = 0; $c -lt 300 -and -not $svcInstallState; $c++)
+        {
+            $svcInstallState = (Get-Service).Name -contains 'graylog-sidecar'
+            Start-Sleep -Seconds 3
+        }
+
+        # Start service
+        Write-Verbose 'Start Graylog Sidecar service'
+        Start-Service -Name 'graylog-sidecar' -ErrorAction Stop
     }
-
-    # Install the service
-    Write-Verbose 'Install Graylog Sidecar service'
-    $svcInstallResult = (& 'C:\Program Files\graylog\sidecar\graylog-sidecar.exe' -service install)
-    $svcInstallResult | Write-Verbose
-
-    # Wait for the service install to complete. To be sure, add a sleep second
-    # after scanning the installation status.
-    $svcInstallState = $false
-    for ($c = 0; $c -lt 300 -and -not $svcInstallState; $c++)
-    {
-        $svcInstallState = (Get-Service).Name -contains 'graylog-sidecar'
-        Start-Sleep -Seconds 3
-    }
-
-    # Start service
-    Write-Verbose 'Start Graylog Sidecar service'
-    Start-Service -Name 'graylog-sidecar' -ErrorAction Stop
 }

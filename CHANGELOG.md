@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is mainly based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.1.0 - 2019-07-22
+
+* Fixed: Resource does not wait until the sidecar was uninstalled
+* Changed: Don't uninstall if an update is pending, just install the update
+
 ## 1.0.1 - 2019-07-22
 
 * Fixed: Don't reset the sidecar node id during an update

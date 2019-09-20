@@ -137,28 +137,21 @@ function Set-TargetResource
         ServerApiToken   = $ServerApiToken
     }
 
-    # Cache the node id for sidecar updates
-    $nodeId = ''
-
     $currentState = Get-TargetResource @getTargetResourceSplat
 
-    # Uninstall the application if it's not needed anymore or has the wrong
-    # installed version.
-    if ($currentState.Ensure -eq 'Present' -and ($Ensure -eq 'Absent' -or ($Ensure -eq 'Present' -and $currentState.SetupVersion -ne $currentState.Version)))
+    # Uninstall the application if it's not needed anymore
+    if ($Ensure -eq 'Absent' -and $currentState.Ensure -eq 'Present')
     {
-        # Cache the current node id
-        $nodeId = Get-GraylogSidecarNodeId
-
         Uninstall-GraylogSidecar
 
         # Update the state after the removal
         $currentState = Get-TargetResource @getTargetResourceSplat
     }
 
-    # Install the application, if it's not presend.
-    if ($Ensure -eq 'Present' -and $currentState.Ensure -eq 'Absent')
+    # Install the application, if it's not presend or needs an update
+    if ($Ensure -eq 'Present' -and ($currentState.Ensure -eq 'Absent' -or $currentState.SetupVersion -ne $currentState.Version))
     {
-        Install-GraylogSidecar -SetupPath $SetupPath -ServerUrl $ServerUrl -ServerApiToken $ServerApiToken -NodeId $nodeId
+        Install-GraylogSidecar -SetupPath $SetupPath -ServerUrl $ServerUrl -ServerApiToken $ServerApiToken
 
         # Update the state after the installation
         $currentState = Get-TargetResource @getTargetResourceSplat
