@@ -12,7 +12,7 @@
 function Set-GraylogSidecarNodeId
 {
     [CmdletBinding()]
-    [OutputType([System.String])]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
     param
     (
         [Parameter(Mandatory = $true)]
