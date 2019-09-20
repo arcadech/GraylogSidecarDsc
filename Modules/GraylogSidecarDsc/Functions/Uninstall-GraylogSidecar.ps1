@@ -23,10 +23,10 @@ function Uninstall-GraylogSidecar
 
     # Wait for the uninstall to complete. To be sure, add a sleep second after
     # scanning the installation status.
-    $appInstallState = $false
+    $appInstallState = $true
     for ($c = 0; $c -lt 300 -and $appInstallState; $c++)
     {
-        $appInstallState = -not [System.String]::IsNullOrWhiteSpace((Get-GraylogSidecarVersion))
-        Start-Sleep -Seconds 1
+        $appInstallState = -not ([System.String]::IsNullOrEmpty((Get-GraylogSidecarVersion)))
+        Start-Sleep -Seconds 3
     }
 }
