@@ -158,13 +158,7 @@ function Set-TargetResource
     # Install the application, if it's not presend.
     if ($Ensure -eq 'Present' -and $currentState.Ensure -eq 'Absent')
     {
-        Install-GraylogSidecar -SetupPath $SetupPath -ServerUrl $ServerUrl -ServerApiToken $ServerApiToken
-
-        # If the sidecar was uninstalled, reset the node id
-        if (-not [System.String]::IsNullOrEmpty($nodeId))
-        {
-            Set-GraylogSidecarNodeId -NodeId $nodeId
-        }
+        Install-GraylogSidecar -SetupPath $SetupPath -ServerUrl $ServerUrl -ServerApiToken $ServerApiToken -NodeId $nodeId
 
         # Update the state after the installation
         $currentState = Get-TargetResource @getTargetResourceSplat

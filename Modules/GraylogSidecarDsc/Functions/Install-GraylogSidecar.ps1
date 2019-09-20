@@ -36,7 +36,12 @@ function Install-GraylogSidecar
 
         [Parameter(Mandatory = $true)]
         [System.String]
-        $ServerApiToken
+        $ServerApiToken,
+
+        [Parameter(Mandatory = $false)]
+        [AllowEmptyString()]
+        [System.String]
+        $NodeId
     )
 
     # Install the application
@@ -50,7 +55,13 @@ function Install-GraylogSidecar
     for ($c = 0; $c -lt 300 -and -not $appInstallState; $c++)
     {
         $appInstallState = -not [System.String]::IsNullOrWhiteSpace((Get-GraylogSidecarVersion))
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 3
+    }
+
+    # Update the node if, if it was specified
+    if (-not ([System.String]::IsNullOrEmpty($NodeId)))
+    {
+        Set-GraylogSidecarNodeId -NodeId $NodeId
     }
 
     # Install the service
@@ -64,7 +75,7 @@ function Install-GraylogSidecar
     for ($c = 0; $c -lt 300 -and -not $svcInstallState; $c++)
     {
         $svcInstallState = (Get-Service).Name -contains 'graylog-sidecar'
-        Start-Sleep -Seconds 1
+        Start-Sleep -Seconds 3
     }
 
     # Start service
