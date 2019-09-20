@@ -3,7 +3,7 @@
     RootModule = 'GraylogSidecarDsc.psm1'
 
     # Version number of this module.
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '1.0.1'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -109,7 +109,7 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = 'https://github.com/arcadesolutionsag/GraylogSidecarDsc/blob/master/CHANGELOG.md'
 
         } # End of PSData hashtable
 
